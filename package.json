@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "apexcharts": "^3.39.0",
-        "react-apexcharts": "^1.4.0"
+        "react-apexcharts": "^1.4.0",
+        "swiper": "^9.2.4"
     }
 }
