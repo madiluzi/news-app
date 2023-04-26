@@ -2,19 +2,12 @@ import { Link } from "@inertiajs/react"
 import { map } from "lodash"
 
 export const Pagination = ({ meta }) => {
-    console.log('meta', meta)
     const prevPage = meta.current_page > 1 ? meta.current_page - 1 : null
-    console.log('prevPage', prevPage)
     const nextPage = meta.current_page < meta.last_page ? meta.current_page + 1 : null
-    console.log('nextPage', nextPage)
     const prevLink = prevPage ? meta.links[0].url : null
-    console.log('prevLink', prevLink)
     const nextLink = nextPage ? meta.links[meta.links.length - 1].url : null
-    console.log('nextLink', nextLink)
     const firstLink = meta.links[1].url
-    console.log('firstLink', firstLink)
     const lastLink = meta.links[meta.links.length - 2].url
-    console.log('lastLink', lastLink)
 
     let pages = []
     for (let index = 0; index < meta.last_page; index++) {
