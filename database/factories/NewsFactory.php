@@ -19,6 +19,7 @@ class NewsFactory extends Factory
         return [
             "title" => fake()->sentence(5),
             "content" => fake()->paragraph(2),
+            "category_id" => fake()->randomDigitNotNull(),
             "author" => fake()->name()
         ];
     }

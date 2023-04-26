@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Inertia\Inertia;
-use App\Models\News;
-use App\Http\Resources\NewsCollection;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\CategoryCollection;
 
-class NewsController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +16,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = new NewsCollection(News::with('category')->paginate(10));
-        return Inertia::render('News/Index', [
-            'news' => $news,
+        $categories = new CategoryCollection(Category::paginate(10));
+        return Inertia::render('Category/Index', [
+            'categories' => $categories,
         ]);
     }
 
@@ -31,7 +29,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return Inertia::render('News/Create');
+        //
     }
 
     /**
@@ -42,21 +40,16 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request->all(), [
-            'title' => ['required'],
-            'content' => ['required'],
-        ])->validate();
-        News::create($request->all());
-        return redirect()->route('news.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(News $news)
+    public function show(Category $category)
     {
         //
     }
@@ -64,10 +57,10 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(News $news)
+    public function edit(Category $category)
     {
         //
     }
@@ -76,10 +69,10 @@ class NewsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -87,10 +80,10 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\News  $news
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy(Category $category)
     {
         //
     }
