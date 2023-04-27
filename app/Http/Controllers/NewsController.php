@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Inertia\Inertia;
 use App\Models\News;
+use App\Models\Category;
 use App\Http\Resources\NewsCollection;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\CategoryCollection;
 
 class NewsController extends Controller
 {
@@ -18,7 +19,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = new NewsCollection(News::with('category')->paginate(10));
+        $news = new NewsCollection(News::with('category')->latest()->paginate(10));
         return Inertia::render('News/Index', [
             'news' => $news,
         ]);
@@ -31,7 +32,10 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return Inertia::render('News/Create');
+        $categories = new CategoryCollection(Category::all());
+        return Inertia::render('News/Create', [
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -42,11 +46,19 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request->all(), [
-            'title' => ['required'],
-            'content' => ['required'],
-        ])->validate();
-        News::create($request->all());
+        $request->validate([
+            'title' => 'required',
+            'category' => 'required',
+            'content' => 'required',
+        ]);
+
+        $news = new News;
+        $news->title = $request->title;
+        $news->category_id = $request->category;
+        $news->content = $request->content;
+        $news->author = auth()->user()->id;
+        $news->save();
+
         return redirect()->route('news.index');
     }
 
@@ -58,7 +70,9 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        //
+        return Inertia::render('News/Create', [
+            'news' => $news,
+        ]);
     }
 
     /**
@@ -69,7 +83,11 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        //
+        $categories = new CategoryCollection(Category::all());
+        return Inertia::render('News/Edit', [
+            'news' => $news,
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -81,7 +99,19 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'category' => 'required',
+            'content' => 'required',
+        ]);
+
+        $news = News::find($request->id);
+        $news->title = $request->title;
+        $news->category_id = $request->category;
+        $news->content = $request->content;
+        $news->save();
+
+        return redirect()->route('news.index');
     }
 
     /**
@@ -92,6 +122,7 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        //
+        $news->delete();
+        return redirect()->route('news.index');
     }
 }
