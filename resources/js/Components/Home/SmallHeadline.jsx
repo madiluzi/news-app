@@ -1,7 +1,7 @@
 export default function SmallHeadline({ popular }) {
     return (
-        <div className="px-4">
-            <p className="font-semibold uppercase tracking-widest">Popular</p>
+        <div className="px-6">
+            <p className="font-semibold text-sm uppercase tracking-widest">Popular</p>
             {
                 popular.data.map((news, index) =>
                     <div key={index} className="border-b border-gray-300 py-3">

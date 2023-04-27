@@ -11,7 +11,7 @@ export default function BigHeadline({ headline }) {
                 disableOnInteraction: false,
             }}
             modules={[Autoplay]}
-            className='h-96'
+            className='h-[32rem] px-4'
         >
             {
                 headline.data.map((news, index) =>
