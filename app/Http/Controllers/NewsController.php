@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Inertia\Inertia;
 use App\Models\News;
 use App\Models\Category;
+use App\Models\Tag;
 use App\Http\Resources\NewsCollection;
 use App\Http\Resources\CategoryCollection;
 
@@ -19,7 +20,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = new NewsCollection(News::with('category')->latest()->paginate(10));
+        $news = new NewsCollection(News::with('category', 'tag')->latest()->paginate(10));
         return Inertia::render('News/Index', [
             'news' => $news,
         ]);
@@ -33,8 +34,10 @@ class NewsController extends Controller
     public function create()
     {
         $categories = new CategoryCollection(Category::all());
+        $tags = new CategoryCollection(Tag::all());
         return Inertia::render('News/Create', [
             'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -48,15 +51,24 @@ class NewsController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'category' => 'required',
+            'subtitle' => 'required',
             'content' => 'required',
+            'image' => 'required',
+            'category' => 'required',
+            'tag' => 'required',
         ]);
+
+        $fileName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('uploads'), $fileName);
 
         $news = new News;
         $news->title = $request->title;
-        $news->category_id = $request->category;
+        $news->subtitle = $request->subtitle;
         $news->content = $request->content;
-        $news->author = auth()->user()->id;
+        $news->image = $fileName;
+        $news->category_id = $request->category;
+        $news->tag_id = $request->tag;
+        $news->author = auth()->user()->name;
         $news->save();
 
         return redirect()->route('news.index');
@@ -84,9 +96,11 @@ class NewsController extends Controller
     public function edit(News $news)
     {
         $categories = new CategoryCollection(Category::all());
+        $tags = new CategoryCollection(Tag::all());
         return Inertia::render('News/Edit', [
             'news' => $news,
             'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -101,14 +115,18 @@ class NewsController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'category' => 'required',
+            'subtitle' => 'required',
             'content' => 'required',
+            'category' => 'required',
+            'tag' => 'required',
         ]);
 
         $news = News::find($request->id);
         $news->title = $request->title;
-        $news->category_id = $request->category;
+        $news->subtitle = $request->subtitle;
         $news->content = $request->content;
+        $news->category_id = $request->category;
+        $news->tag_id = $request->tag;
         $news->save();
 
         return redirect()->route('news.index');

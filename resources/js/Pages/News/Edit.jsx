@@ -1,14 +1,30 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm, usePage } from '@inertiajs/react';
+import Select from 'react-select';
 
 export default function Edit(props) {
     const { data, setData, put, errors } = useForm({
         id: props.news.id,
         title: props.news.title || "",
-        category: props.news.category_id || "",
+        subtitle: props.news.subtitle || "",
         content: props.news.content || "",
+        category: props.news.category_id || "",
+        tag: props.news.tag_id || "",
     });
-    console.log(data)
+
+    const categoryOptions =
+        props.categories.data.map(category => {
+            category.value = category.id
+            category.label = category.title
+            return category;
+        })
+
+    const tagOptions =
+        props.tags.data.map(category => {
+            category.value = category.id
+            category.label = category.title
+            return category;
+        })
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -35,7 +51,27 @@ export default function Edit(props) {
                                 required />
                         </div>
                         <div className="mb-6">
-                            <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900">Title</label>
+                            <label htmlFor="subtitle" className="block mb-2 text-sm font-medium text-gray-900">Subtitle</label>
+                            <textarea type="text" id="subtitle" name="subtitle"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                onChange={(e) => setData("subtitle", e.target.value)}
+                                value={data.subtitle}
+                                required />
+                        </div>
+                        <div className="mb-6">
+                            <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-900">Content</label>
+                            <textarea type="text" id="content" name="content"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                onChange={(e) => setData("content", e.target.value)}
+                                value={data.content}
+                                required />
+                        </div>
+                        <div className="mb-6">
+                            <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900">Category</label>
+                            {/* <Select id="category" className='text-sm rounded-lg'
+                                options={categoryOptions}
+                                onChange={(e) => setData("category", e.value)}
+                                defaultValue={data.category} /> */}
                             <select id="category" name="category"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 onChange={(e) => setData("category", e.target.value)}
@@ -47,12 +83,19 @@ export default function Edit(props) {
                             </select>
                         </div>
                         <div className="mb-6">
-                            <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-900">Content</label>
-                            <textarea type="text" id="content" name="content"
+                            <label htmlFor="tag" className="block mb-2 text-sm font-medium text-gray-900">Tag</label>
+                            {/* <Select id="tag" className='text-sm rounded-lg'
+                                options={tagOptions}
+                                onChange={(e) => setData("tag", e.value)} /> */}
+                            <select id="tag" name="tag"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                onChange={(e) => setData("content", e.target.value)}
-                                value={data.content}
-                                required />
+                                onChange={(e) => setData("tag", e.target.value)}
+                                value={data.tag}
+                            >
+                                {
+                                    props.tags.data.map(tag => <option key={tag.id} value={tag.id}>{tag.title}</option>)
+                                }
+                            </select>
                         </div>
                         <input type='hidden' value={data.id} />
                         <button type="submit"

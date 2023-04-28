@@ -16,12 +16,13 @@ return new class extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            // $table->text('subtitle');
+            $table->text('subtitle');
             $table->text('content');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
-            // $table->integer('tag_id')->unsigned();
-            // $table->foreign('tag_id')->references('id')->on('tag')->onDelete('cascade');
+            $table->integer('tag_id')->unsigned();
+            $table->foreign('tag_id')->references('id')->on('tag')->onDelete('cascade');
+            $table->text('image');
             // $table->integer('media_id')->unsigned();
             // $table->foreign('media_id')->references('id')->on('media')->onDelete('cascade');
             $table->string('author');

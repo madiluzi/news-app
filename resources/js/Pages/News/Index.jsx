@@ -36,8 +36,14 @@ export default function Index(props) {
                                     <th scope="col" className="px-6 py-3">
                                         Content
                                     </th>
+                                    {/* <th scope="col" className="px-6 py-3">
+                                        Image
+                                    </th> */}
                                     <th scope="col" className="px-6 py-3">
                                         Category
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Tag
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         Author
@@ -53,7 +59,11 @@ export default function Index(props) {
                                                 <td className="px-6 py-4">{key + 1}</td>
                                                 <td className="px-6 py-4">{item.title}</td>
                                                 <td className="px-6 py-4">{item.content}</td>
+                                                {/* <td className="px-6 py-4">
+                                                    <img src={window.location.origin + '/uploads/' + item.image} className='h-20 w-full object-cover' />
+                                                </td> */}
                                                 <td className="px-6 py-4">{item.category.title}</td>
+                                                <td className="px-6 py-4">{item.tag.title}</td>
                                                 <td className="px-6 py-4">{item.author}</td>
                                                 <td className="px-6 py-4">
                                                     <div className='h-full flex items-center'>
