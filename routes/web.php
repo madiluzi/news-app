@@ -36,7 +36,7 @@ Route::resource('news', NewsController::class)
     // ->only(['index', 'store'])
     ->middleware(['auth', 'verified']);
 
-Route::resource('categories', CategoryController::class)
+Route::resource('category', CategoryController::class)
     // ->only(['index', 'store'])
     ->middleware(['auth', 'verified']);
 

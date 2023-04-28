@@ -36,7 +36,7 @@ export default function Authenticated({ auth, header, children }) {
                                 </NavLink>
                             </div>
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('categories.index')} active={route().current('categories.index')}>
+                                <NavLink href={route('category.index')} active={route().current('category.index')}>
                                     Category
                                 </NavLink>
                             </div>
@@ -116,7 +116,7 @@ export default function Authenticated({ auth, header, children }) {
                         <ResponsiveNavLink href={route('news.index')} active={route().current('news.index')}>
                             News
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('categories.index')} active={route().current('categories.index')}>
+                        <ResponsiveNavLink href={route('category.index')} active={route().current('category.index')}>
                             Category
                         </ResponsiveNavLink>
                     </div>
