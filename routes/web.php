@@ -21,7 +21,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -30,32 +30,35 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    // })->middleware(['auth', 'verified'])->name('dashboard');
+    })->name('dashboard');
 
-Route::resource('news', NewsController::class)
-    // ->only(['index', 'store'])
-    ->middleware(['auth', 'verified']);
+    Route::resource('news', NewsController::class)
+        // ->only(['index', 'store'])
+        ->middleware(['auth', 'verified']);
 
-Route::resource('category', CategoryController::class)
-    // ->only(['index', 'store'])
-    ->middleware(['auth', 'verified']);
+    Route::resource('category', CategoryController::class)
+        // ->only(['index', 'store'])
+        ->middleware(['auth', 'verified']);
 
-Route::resource('tag', TagController::class)
-    // ->only(['index', 'store'])
-    ->middleware(['auth', 'verified']);
+    Route::resource('tag', TagController::class)
+        // ->only(['index', 'store'])
+        ->middleware(['auth', 'verified']);
 
-Route::resource('media', MediaController::class)
-    // ->only(['index', 'store'])
-    ->middleware(['auth', 'verified']);
+    Route::resource('media', MediaController::class)
+        // ->only(['index', 'store'])
+        ->middleware(['auth', 'verified']);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/article/{id}', [HomeController::class, 'show'])->name('article');
 
 require __DIR__.'/auth.php';
