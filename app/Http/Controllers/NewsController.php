@@ -50,17 +50,18 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'title' => 'required',
             'subtitle' => 'required',
             'content' => 'required',
-            'image' => 'required',
+            'media' => 'required',
             'category' => 'required',
             'tag' => 'required',
         ]);
 
-        $fileName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('uploads'), $fileName);
+        $fileName = time().'.'.$request->media->extension();
+        $request->media->move(public_path('uploads'), $fileName);
 
         $media = new Media;
         $media->caption = $request->title;
@@ -71,7 +72,7 @@ class NewsController extends Controller
         $news->title = $request->title;
         $news->subtitle = $request->subtitle;
         $news->content = $request->content;
-        $news->image = $fileName;
+        $news->media_id = $media::latest()->first()->id;
         $news->category_id = $request->category;
         $news->tag_id = $request->tag;
         $news->author = auth()->user()->name;

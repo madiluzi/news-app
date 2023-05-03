@@ -9,7 +9,7 @@ export default function Create(props) {
         title: "",
         subtitle: "",
         content: "",
-        image: "",
+        media: "",
         category: "",
         tag: "",
     });
@@ -101,10 +101,10 @@ export default function Create(props) {
                             /> */}
                         </div>
                         <div className="mb-6">
-                            <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900">Image</label>
-                            <input type="file" id="image" name="image"
+                            <label htmlFor="media" className="block mb-2 text-sm font-medium text-gray-900">Image</label>
+                            <input type="file" id="media" name="media"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                onChange={(e) => setData("image", e.target.files[0])}
+                                onChange={(e) => setData("media", e.target.files[0])}
                                 required />
                         </div>
                         <div className="flex">
