@@ -17,7 +17,7 @@ class MediaController extends Controller
     public function index()
     {
         $medias = new NewsCollection(Media::latest()->paginate(32));
-        return Inertia::render('Media/Index', [
+        return Inertia::render('Admin/Media/Index', [
             'medias' => $medias,
         ]);
     }
@@ -29,7 +29,7 @@ class MediaController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Media/Create');
+        return Inertia::render('Admin/Media/Create');
     }
 
     /**
@@ -75,7 +75,7 @@ class MediaController extends Controller
      */
     public function edit(Media $medium)
     {
-         return Inertia::render('Media/Edit', [
+         return Inertia::render('Admin/Media/Edit', [
             'media' => $medium,
         ]);
     }

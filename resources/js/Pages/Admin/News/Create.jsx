@@ -107,33 +107,35 @@ export default function Create(props) {
                                 onChange={(e) => setData("image", e.target.files[0])}
                                 required />
                         </div>
-                        <div className="mb-6">
-                            <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900">Category</label>
-                            {/* <Select id="category" className='text-sm rounded-lg'
+                        <div className="flex">
+                            <div className="mb-6 w-6/12 pr-2">
+                                <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900">Category</label>
+                                {/* <Select id="category" className='text-sm rounded-lg'
                                 options={categoryOptions}
                                 onChange={(e) => setData("category", e.value)} /> */}
-                            <select id="category" name="category"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                onChange={(e) => setData("category", e.target.value)}
-                            >
-                                {
-                                    props.categories.data.map(category => <option key={category.id} value={category.id}>{category.title}</option>)
-                                }
-                            </select>
-                        </div>
-                        <div className="mb-6">
-                            <label htmlFor="tag" className="block mb-2 text-sm font-medium text-gray-900">Tag</label>
-                            {/* <Select id="tag" className='text-sm rounded-lg'
+                                <select id="category" name="category"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    onChange={(e) => setData("category", e.target.value)}
+                                >
+                                    {
+                                        props.categories.data.map(category => <option key={category.id} value={category.id}>{category.title}</option>)
+                                    }
+                                </select>
+                            </div>
+                            <div className="mb-6 w-6/12 pl-2">
+                                <label htmlFor="tag" className="block mb-2 text-sm font-medium text-gray-900">Tag</label>
+                                {/* <Select id="tag" className='text-sm rounded-lg'
                                 options={tagOptions}
                                 onChange={(e) => setData("tag", e.value)} /> */}
-                            <select id="tag" name="tag"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                onChange={(e) => setData("tag", e.target.value)}
-                            >
-                                {
-                                    props.tags.data.map(tag => <option key={tag.id} value={tag.id}>{tag.title}</option>)
-                                }
-                            </select>
+                                <select id="tag" name="tag"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    onChange={(e) => setData("tag", e.target.value)}
+                                >
+                                    {
+                                        props.tags.data.map(tag => <option key={tag.id} value={tag.id}>{tag.title}</option>)
+                                    }
+                                </select>
+                            </div>
                         </div>
                         <button type="submit"
                             className='inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'>

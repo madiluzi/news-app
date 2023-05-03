@@ -17,7 +17,7 @@ class TagController extends Controller
     public function index()
     {
         $tags = new CategoryCollection(Tag::latest()->paginate(10));
-        return Inertia::render('Tag/Index', [
+        return Inertia::render('Admin/Tag/Index', [
             'tags' => $tags,
         ]);
     }
@@ -29,7 +29,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Tag/Create');
+        return Inertia::render('Admin/Tag/Create');
     }
 
     /**
@@ -70,7 +70,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        return Inertia::render('Tag/Edit', [
+        return Inertia::render('Admin/Tag/Edit', [
             'tag' => $tag,
         ]);
     }

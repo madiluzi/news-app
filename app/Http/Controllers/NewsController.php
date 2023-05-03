@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Models\News;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Models\Media;
 use App\Http\Resources\NewsCollection;
 use App\Http\Resources\CategoryCollection;
 
@@ -21,7 +22,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = new NewsCollection(News::with('category', 'tag')->latest()->paginate(10));
-        return Inertia::render('News/Index', [
+        return Inertia::render('Admin/News/Index', [
             'news' => $news,
         ]);
     }
@@ -35,7 +36,7 @@ class NewsController extends Controller
     {
         $categories = new CategoryCollection(Category::all());
         $tags = new CategoryCollection(Tag::all());
-        return Inertia::render('News/Create', [
+        return Inertia::render('Admin/News/Create', [
             'categories' => $categories,
             'tags' => $tags,
         ]);
@@ -61,6 +62,11 @@ class NewsController extends Controller
         $fileName = time().'.'.$request->image->extension();
         $request->image->move(public_path('uploads'), $fileName);
 
+        $media = new Media;
+        $media->caption = $request->title;
+        $media->url = $fileName;
+        $media->save();
+
         $news = new News;
         $news->title = $request->title;
         $news->subtitle = $request->subtitle;
@@ -82,7 +88,7 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        return Inertia::render('News/Create', [
+        return Inertia::render('Admin/News/Create', [
             'news' => $news,
         ]);
     }
@@ -97,7 +103,7 @@ class NewsController extends Controller
     {
         $categories = new CategoryCollection(Category::all());
         $tags = new CategoryCollection(Tag::all());
-        return Inertia::render('News/Edit', [
+        return Inertia::render('Admin/News/Edit', [
             'news' => $news,
             'categories' => $categories,
             'tags' => $tags,

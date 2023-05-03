@@ -17,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = new CategoryCollection(Category::latest()->paginate(10));
-        return Inertia::render('Category/Index', [
+        return Inertia::render('Admin/Category/Index', [
             'categories' => $categories,
         ]);
     }
@@ -29,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Category/Create');
+        return Inertia::render('Admin/Category/Create');
     }
 
     /**
@@ -70,7 +70,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return Inertia::render('Category/Edit', [
+        return Inertia::render('Admin/Category/Edit', [
             'category' => $category,
         ]);
     }
