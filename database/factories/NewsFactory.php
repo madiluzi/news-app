@@ -20,7 +20,7 @@ class NewsFactory extends Factory
             "title" => fake()->sentence(10),
             "subtitle" => fake()->paragraphs(2, true),
             "content" => fake()->paragraphs(10, true),
-            "image" => fake()->sentence(1),
+            "media_id" => fake()->numberBetween(1, 50),
             "category_id" => fake()->randomDigitNotNull(),
             "tag_id" => fake()->randomDigitNotNull(),
             "author" => fake()->name()

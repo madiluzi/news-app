@@ -14,6 +14,6 @@ class Media extends Model
     ];
 
     public function news() {
-        return $this->hasMany(News::class, 'category_code');
+        return $this->hasMany(News::class);
     }
 }

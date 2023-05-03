@@ -20,4 +20,8 @@ class News extends Model
     public function tag() {
         return $this->belongsTo(Tag::class);
     }
+
+    public function media() {
+        return $this->belongsTo(Media::class);
+    }
 }

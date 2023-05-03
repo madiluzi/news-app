@@ -16,7 +16,7 @@ class MediaFactory extends Factory
      */
     public function definition()
     {
-        $url = 'https://picsum.photos/1000/500?random=' . fake()->numberBetween(1, 100);
+        $url = 'https://picsum.photos/1000/500?random=' . fake()->numberBetween(1, 50);
         return [
             "caption" => fake()->sentence(2),
             "url" => $url,
