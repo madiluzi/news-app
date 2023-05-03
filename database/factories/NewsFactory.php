@@ -17,9 +17,9 @@ class NewsFactory extends Factory
     public function definition()
     {
         return [
-            "title" => fake()->sentence(5),
-            "subtitle" => fake()->sentence(10),
-            "content" => fake()->paragraph(3),
+            "title" => fake()->sentence(10),
+            "subtitle" => fake()->paragraphs(2, true),
+            "content" => fake()->paragraphs(10, true),
             "image" => fake()->sentence(1),
             "category_id" => fake()->randomDigitNotNull(),
             "tag_id" => fake()->randomDigitNotNull(),
