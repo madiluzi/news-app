@@ -1,6 +1,8 @@
+import { Link } from "@inertiajs/react"
+
 export const NewsItem = ({ news }) => {
     return (
-        <div className="px-3 pt-3 pb-4">
+        <Link href={route('article', news.id)} className="px-3 pt-3 pb-4" >
             <img src={`https://picsum.photos/400/500?random=${news.id}`} className="rounded-lg h-40 w-full object-cover mb-5" />
             <p className="inline text-neutral-500">{news.category.title} - </p>
             <p className="inline text-neutral-500">{(new Date(news.created_at)).toDateString()}</p>
@@ -10,6 +12,6 @@ export const NewsItem = ({ news }) => {
                 <p className="text-gray-700 text-sm">{news.author}</p>
             </div>
             {/* <p className="text-neutral-500 text-sm mb-4 line-clamp-4">{news.content}</p> */}
-        </div>
+        </Link>
     )
 }

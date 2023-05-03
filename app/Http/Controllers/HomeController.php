@@ -21,4 +21,12 @@ class HomeController extends Controller
             'news' => $news,
         ]);
     }
+
+    public function show($id)
+    {
+        $news = News::with('category', 'tag')->find($id);
+        return Inertia::render('Detail', [
+            'news' => $news
+        ]);
+    }
 }
