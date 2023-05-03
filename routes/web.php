@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,10 @@ Route::resource('category', CategoryController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('tag', TagController::class)
+    // ->only(['index', 'store'])
+    ->middleware(['auth', 'verified']);
+
+Route::resource('media', MediaController::class)
     // ->only(['index', 'store'])
     ->middleware(['auth', 'verified']);
 

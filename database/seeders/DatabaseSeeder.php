@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             TagSeeder::class,
             NewsSeeder::class,
+            MediaSeeder::class,
             // UserSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
@@ -27,5 +28,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);
+
+        // for ($i=0; $i < 50; $i++) {
+        //     \App\Models\Media::insert([
+        //         'caption' => fake()->sentence(2),
+        //         'url' => 'https://picsum.photos/400/500?random=' . $i + 1,
+        //     ]);
+        // }
     }
 }
