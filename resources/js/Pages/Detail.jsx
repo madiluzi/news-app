@@ -18,9 +18,12 @@ export default function Detail(props) {
                         </div>
                     </div>
                     <div className='flex'>
-                        <div className='w-3/12'>
-                            <p className='font-bold'>Author</p>
-                            <p className='mb-6'>{props.news.author}</p>
+                        <div className='w-3/12 flex'>
+                            <img src='https://picsum.photos/1000/500?random=1' alt={props.news.author} className='w-12 h-12 mr-3 rounded-full' />
+                            <div>
+                                <p className='font-bold'>Author</p>
+                                <p className='mb-6'>{props.news.author}</p>
+                            </div>
                         </div>
                         <div className='w-3/12'>
                             <p className='font-bold'>Category</p>
@@ -35,7 +38,7 @@ export default function Detail(props) {
             </div>
             <div className='relative h-0 sm:px-6 lg:px-8'>
                 <div className='absolute bottom-0 w-full'>
-                    <img src='https://picsum.photos/1000/500?random=1' className='h-96 w-fit object-cover' />
+                    <img src={props.news.media.url} className='h-96 w-fit object-cover' />
                 </div>
             </div>
             <div className='py-12'>

@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         // $news = News::all();
-        $headline = new NewsCollection(News::with('category')->skip(0)->take(6)->get());
+        $headline = new NewsCollection(News::with('category', 'media')->skip(0)->take(6)->get());
         $popular = new NewsCollection(News::with('category')->skip(0)->take(4)->get());
         $news = new NewsCollection(News::with('category')->paginate(6));
         return Inertia::render('Home', [
@@ -24,7 +24,7 @@ class HomeController extends Controller
 
     public function show($id)
     {
-        $news = News::with('category', 'tag')->find($id);
+        $news = News::with('category', 'tag', 'media')->find($id);
         return Inertia::render('Detail', [
             'news' => $news
         ]);
