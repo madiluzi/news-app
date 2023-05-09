@@ -63,20 +63,13 @@ export default function Create(props) {
                         </div>
                         <div className="mb-6">
                             <label htmlFor="subtitle" className="block mb-2 text-sm font-medium text-gray-900">Subtitle</label>
-                            <textarea type="text" id="subtitle" name="subtitle"
+                            {/* <textarea type="text" id="subtitle" name="subtitle"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 onChange={(e) => setData("subtitle", e.target.value)}
-                                required />
-                        </div>
-                        <div className="mb-6">
-                            <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-900">Content</label>
-                            <textarea type="text" id="content" name="content"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                onChange={(e) => setData("content", e.target.value)}
-                                required />
-                            {/* <CKEditor
+                                required /> */}
+                            <CKEditor
                                 editor={ClassicEditor}
-                                data="<p>Hello from CKEditor 5!</p>"
+                                data=""
                                 onReady={editor => {
                                     // You can store the "editor" and use when it is needed.
                                     console.log('Editor is ready to use!', editor);
@@ -89,16 +82,48 @@ export default function Create(props) {
                                     });
                                 }}
                                 onChange={(event, editor) => {
-                                    const data = editor.getData();
-                                    console.log({ event, editor, data });
+                                    // const data = editor.getData();
+                                    setData("subtitle", editor.getData())
                                 }}
-                                onBlur={(event, editor) => {
-                                    console.log('Blur.', editor);
+                            // onBlur={(event, editor) => {
+                            //     console.log('Blur.', editor);
+                            // }}
+                            // onFocus={(event, editor) => {
+                            //     console.log('Focus.', editor);
+                            // }}
+                            />
+                        </div>
+                        <div className="mb-6">
+                            <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-900">Content</label>
+                            {/* <textarea type="text" id="content" name="content"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                onChange={(e) => setData("content", e.target.value)}
+                                required /> */}
+                            <CKEditor
+                                editor={ClassicEditor}
+                                data=""
+                                onReady={editor => {
+                                    // You can store the "editor" and use when it is needed.
+                                    console.log('Editor is ready to use!', editor);
+                                    editor.editing.view.change((writer) => {
+                                        writer.setStyle(
+                                            "height",
+                                            "200px",
+                                            editor.editing.view.document.getRoot()
+                                        );
+                                    });
                                 }}
-                                onFocus={(event, editor) => {
-                                    console.log('Focus.', editor);
+                                onChange={(event, editor) => {
+                                    // const data = editor.getData();
+                                    setData("content", editor.getData())
                                 }}
-                            /> */}
+                            // onBlur={(event, editor) => {
+                            //     console.log('Blur.', editor);
+                            // }}
+                            // onFocus={(event, editor) => {
+                            //     console.log('Focus.', editor);
+                            // }}
+                            />
                         </div>
                         <div className="mb-6">
                             <label htmlFor="media" className="block mb-2 text-sm font-medium text-gray-900">Image</label>

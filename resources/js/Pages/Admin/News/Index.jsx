@@ -58,7 +58,10 @@ export default function Index(props) {
                                             <tr key={key} className="bg-white border-b">
                                                 <td className="px-6 py-4">{key + 1}</td>
                                                 <td className="px-6 py-4">{item.title}</td>
-                                                <td className="px-6 py-4">{item.content}</td>
+                                                {/* <td className="px-6 py-4">{item.content}</td> */}
+                                                <td className="px-6 py-4">
+                                                    <div dangerouslySetInnerHTML={{ __html: item.content }} />
+                                                </td>
                                                 {/* <td className="px-6 py-4">
                                                     <img src={window.location.origin + '/uploads/' + item.image} className='h-20 w-full object-cover' />
                                                 </td> */}

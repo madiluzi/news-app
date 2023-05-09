@@ -20,8 +20,11 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^37.1.0",
+        "@ckeditor/ckeditor5-react": "^6.0.0",
         "apexcharts": "^3.39.0",
         "react-apexcharts": "^1.4.0",
+        "react-select": "^5.7.2",
         "swiper": "^9.2.4"
     }
 }
