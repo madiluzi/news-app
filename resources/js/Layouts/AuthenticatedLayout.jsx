@@ -26,11 +26,6 @@ export default function Authenticated({ auth, header, children }) {
                                 </NavLink>
                             </div>
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('home')} active={route().current('home')}>
-                                    Home
-                                </NavLink>
-                            </div>
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('news.index')} active={route().current('news.index')}>
                                     News
                                 </NavLink>
@@ -43,6 +38,11 @@ export default function Authenticated({ auth, header, children }) {
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('tag.index')} active={route().current('tag.index')}>
                                     Tag
+                                </NavLink>
+                            </div>
+                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink href={route('media.index')} active={route().current('media.index')}>
+                                    Media
                                 </NavLink>
                             </div>
                         </div>
@@ -115,9 +115,6 @@ export default function Authenticated({ auth, header, children }) {
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('home')} active={route().current('home')}>
-                            Home
-                        </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('news.index')} active={route().current('news.index')}>
                             News
                         </ResponsiveNavLink>
@@ -126,6 +123,9 @@ export default function Authenticated({ auth, header, children }) {
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('tag.index')} active={route().current('tag.index')}>
                             Tag
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('media.index')} active={route().current('media.index')}>
+                            Media
                         </ResponsiveNavLink>
                     </div>
 
