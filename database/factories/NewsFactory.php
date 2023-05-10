@@ -16,14 +16,19 @@ class NewsFactory extends Factory
      */
     public function definition()
     {
+        $paragraphs = fake()->paragraphs(rand(6, 10));
+        $content = "";
+        foreach ($paragraphs as $item) {
+            $content .= "<p>{$item}</p>";
+        }
         return [
-            "title" => fake()->sentence(10),
-            "subtitle" => fake()->paragraphs(2, true),
-            "content" => fake()->paragraphs(10, true),
+            "title" => fake()->realText(rand(50, 75)),
+            "subtitle" => fake()->realText(200),
+            "content" => $content,
             "media_id" => fake()->numberBetween(1, 50),
             "category_id" => fake()->randomDigitNotNull(),
             "tag_id" => fake()->randomDigitNotNull(),
-            "author" => fake()->name()
+            "author_id" => fake()->randomDigitNotNull()
         ];
     }
 }

@@ -24,4 +24,8 @@ class News extends Model
     public function media() {
         return $this->belongsTo(Media::class);
     }
+
+    public function author() {
+        return $this->belongsTo(User::class);
+    }
 }
