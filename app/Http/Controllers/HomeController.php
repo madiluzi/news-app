@@ -13,8 +13,8 @@ class HomeController extends Controller
     {
         // $news = News::all();
         $headline = new NewsCollection(News::with('category', 'media')->inRandomOrder()->limit(5)->get());
-        $popular = new NewsCollection(News::with('category', 'media')->inRandomOrder()->limit(4)->get());
-        $news = new NewsCollection(News::with('category', 'media')->paginate(6));
+        $popular = new NewsCollection(News::inRandomOrder()->limit(4)->get());
+        $news = new NewsCollection(News::with('category', 'media', 'author')->paginate(6));
         return Inertia::render('Home', [
             'headline' => $headline,
             'popular' => $popular,
@@ -24,8 +24,32 @@ class HomeController extends Controller
 
     public function show($id)
     {
-        $news = News::with('category', 'tag', 'media')->find($id);
+        $news = News::with('category', 'tag', 'media', 'author')->find($id);
         return Inertia::render('Detail', [
+            'news' => $news
+        ]);
+    }
+
+    public function category($id)
+    {
+        $news = new NewsCollection(News::with('category', 'media', 'author')->where('category_id', $id)->paginate(6));
+        return Inertia::render('Category', [
+            'news' => $news
+        ]);
+    }
+
+    public function tag($id)
+    {
+        $news = new NewsCollection(News::with('category', 'media', 'author')->where('tag_id', $id)->paginate(6));
+        return Inertia::render('Tag', [
+            'news' => $news
+        ]);
+    }
+
+    public function author($id)
+    {
+        $news = new NewsCollection(News::with('category', 'media', 'author')->where('author_id', $id)->paginate(6));
+        return Inertia::render('Author', [
             'news' => $news
         ]);
     }

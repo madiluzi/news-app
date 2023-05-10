@@ -60,5 +60,8 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/article/{id}', [HomeController::class, 'show'])->name('article');
+Route::get('/category/{id}', [HomeController::class, 'category'])->name('category');
+Route::get('/tag/{id}', [HomeController::class, 'tag'])->name('tag');
+Route::get('/author/{id}', [HomeController::class, 'author'])->name('author');
 
 require __DIR__.'/auth.php';

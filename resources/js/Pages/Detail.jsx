@@ -2,8 +2,9 @@ import Headline from '@/Components/Home/Headline';
 import { NewsList } from '@/Components/NewsList';
 import { Pagination } from '@/Components/Pagination';
 import Unauthenticated from '@/Layouts/UnauthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 export default function Detail(props) {
+    console.log(props)
     const isValidUrl = (url) => {
         try {
             new URL(url);
@@ -27,15 +28,15 @@ export default function Detail(props) {
                     </div>
                     <div className='flex'>
                         <div className='w-3/12 flex'>
-                            <img src='https://picsum.photos/1000/500?random=1' alt={props.news.author} className='w-12 h-12 mr-3 rounded-full object-cover' />
+                            <img src='https://picsum.photos/1000/500?random=1' alt={props.news.author.name} className='w-12 h-12 mr-3 rounded-full object-cover' />
                             <div>
                                 <p className='font-bold'>Author</p>
-                                <p className='mb-6'>{props.news.author}</p>
+                                <p className='mb-6'>{props.news.author.name}</p>
                             </div>
                         </div>
                         <div className='w-3/12'>
                             <p className='font-bold'>Category</p>
-                            <p className='mb-6'>{props.news.category.title}</p>
+                            <Link href={route('category', props.news.category_id)} className='mb-6'>{props.news.category.title}</Link>
                         </div>
                         <div className='w-3/12 flex'></div>
                         <div className='w-3/12 flex'>
@@ -51,7 +52,7 @@ export default function Detail(props) {
             </div>
             <div className='py-12'>
                 <div className="mx-auto sm:px-6 lg:px-8">
-                    <div dangerouslySetInnerHTML={{ __html: props.news.content }} />
+                    <div className='prose w-full' dangerouslySetInnerHTML={{ __html: props.news.content }} />
                 </div>
             </div >
         </Unauthenticated >
