@@ -13,7 +13,7 @@ export default function Category(props) {
                 <div className="mx-auto sm:px-6 lg:px-8">
                     <div className='max-w-5xl mx-auto'>
                         <p className="px-3 mb-6 font-semibold text-3xl">{props.news.data[0].category.title}</p>
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="px-2 lg:px-0 grid grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4">
                             {
                                 props.news.data.map((item, key) =>
                                     <NewsItem key={key} news={item} />
