@@ -18,7 +18,7 @@ export default function Index(props) {
             new URL(url);
             return url;
         } catch (e) {
-            return window.location.origin + '/uploads/' + url;
+            return '/storage/' + url;
         }
     }
 
@@ -42,7 +42,7 @@ export default function Index(props) {
                         className="inline-block items-center px-4 py-2 mb-6 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                         Add Item</Link>
                     <div className="relative overflow-x-auto mb-6">
-                        <div className='grid grid-cols-8 gap-4'>
+                        <div className='grid grid-cols-6 gap-4'>
                             {
                                 props.medias.data.map((item, index) => {
                                     return (
