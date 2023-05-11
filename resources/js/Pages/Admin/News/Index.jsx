@@ -60,14 +60,14 @@ export default function Index(props) {
                                                 <td className="px-6 py-4">{item.title}</td>
                                                 {/* <td className="px-6 py-4">{item.content}</td> */}
                                                 <td className="px-6 py-4">
-                                                    <div dangerouslySetInnerHTML={{ __html: item.content }} />
+                                                    <div className='prose prose-sm text-gray-500 line-clamp-5' dangerouslySetInnerHTML={{ __html: item.content }} />
                                                 </td>
                                                 {/* <td className="px-6 py-4">
                                                     <img src={window.location.origin + '/uploads/' + item.image} className='h-20 w-full object-cover' />
                                                 </td> */}
                                                 <td className="px-6 py-4">{item.category.title}</td>
                                                 <td className="px-6 py-4">{item.tag.title}</td>
-                                                <td className="px-6 py-4">{item.author}</td>
+                                                <td className="px-6 py-4">{item.author.name}</td>
                                                 <td className="px-6 py-4">
                                                     <div className='h-full flex gap-4 items-center'>
                                                         <Link href={route(`news.edit`, item.id)}

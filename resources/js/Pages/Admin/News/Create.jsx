@@ -3,8 +3,12 @@ import { Head, useForm } from '@inertiajs/react';
 import Select from 'react-select';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Create(props) {
+    const [selectedFile, setSelectedFile] = useState()
+    const [preview, setPreview] = useState()
     const { data, setData, post, errors } = useForm({
         title: "",
         subtitle: "",
@@ -13,8 +17,6 @@ export default function Create(props) {
         category: "",
         tag: "",
     });
-
-    console.log(data)
 
     const categoryOptions =
         props.categories.data.map(category => {
@@ -29,6 +31,31 @@ export default function Create(props) {
             category.label = category.title
             return category;
         })
+
+    // create a preview as a side effect, whenever selected file is changed
+    useEffect(() => {
+        if (!selectedFile) {
+            setPreview(undefined)
+            return
+        }
+
+        const objectUrl = URL.createObjectURL(selectedFile)
+        setPreview(objectUrl)
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [selectedFile])
+
+    const onSelectFile = e => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile(undefined)
+            return
+        }
+
+        // I've kept this example simple by using the first image instead of multiple
+        setData("media", e.target.files[0])
+        setSelectedFile(e.target.files[0])
+    }
 
     // const options = [
     //     { value: 'chocolate', label: 'Chocolate' },
@@ -127,39 +154,46 @@ export default function Create(props) {
                         </div>
                         <div className="mb-6">
                             <label htmlFor="media" className="block mb-2 text-sm font-medium text-gray-900">Image</label>
-                            <input type="file" id="media" name="media"
+                            {selectedFile && <img src={preview} className='mb-2 h-56 w-auto mx-auto' />}
+                            <input type="file" id="media" name="media" accept='image/*'
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                onChange={(e) => setData("media", e.target.files[0])}
+                                onChange={onSelectFile}
                                 required />
                         </div>
-                        <div className="flex">
-                            <div className="mb-6 w-6/12 pr-2">
+                        <div className="flex gap-4">
+                            <div className="mb-6 w-6/12">
                                 <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900">Category</label>
-                                {/* <Select id="category" className='text-sm rounded-lg'
-                                options={categoryOptions}
-                                onChange={(e) => setData("category", e.value)} /> */}
-                                <select id="category" name="category"
+                                <Select id="category"
+                                    className="basic-multi-select"
+                                    classNamePrefix="select"
+                                    // isMulti
+                                    options={categoryOptions}
+                                    onChange={(e) => setData("category", e.value)} />
+                                {/* <select id="category" name="category"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     onChange={(e) => setData("category", e.target.value)}
                                 >
                                     {
                                         props.categories.data.map(category => <option key={category.id} value={category.id}>{category.title}</option>)
                                     }
-                                </select>
+                                </select> */}
                             </div>
-                            <div className="mb-6 w-6/12 pl-2">
+                            <div className="mb-6 w-6/12">
                                 <label htmlFor="tag" className="block mb-2 text-sm font-medium text-gray-900">Tag</label>
-                                {/* <Select id="tag" className='text-sm rounded-lg'
-                                options={tagOptions}
-                                onChange={(e) => setData("tag", e.value)} /> */}
-                                <select id="tag" name="tag"
+                                <Select id="tag"
+                                    className="basic-multi-select"
+                                    classNamePrefix="select"
+                                    // isMulti
+                                    options={tagOptions}
+                                    onChange={(e) => setData("tag", e.value)} />
+                                {/* <select id="tag" name="tag"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     onChange={(e) => setData("tag", e.target.value)}
                                 >
                                     {
                                         props.tags.data.map(tag => <option key={tag.id} value={tag.id}>{tag.title}</option>)
                                     }
-                                </select>
+                                </select> */}
                             </div>
                         </div>
                         <button type="submit"

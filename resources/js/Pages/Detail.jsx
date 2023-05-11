@@ -4,13 +4,12 @@ import { Pagination } from '@/Components/Pagination';
 import Unauthenticated from '@/Layouts/UnauthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 export default function Detail(props) {
-    console.log(props)
     const isValidUrl = (url) => {
         try {
             new URL(url);
             return url;
         } catch (e) {
-            return window.location.origin + '/uploads/' + url;
+            return '/storage/' + url;
         }
     }
 

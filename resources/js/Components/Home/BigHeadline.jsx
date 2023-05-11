@@ -8,7 +8,7 @@ export default function BigHeadline({ headline }) {
             new URL(url);
             return url;
         } catch (e) {
-            return window.location.origin + '/uploads/' + url;
+            return '/storage/' + url;
         }
     }
     return (
@@ -32,7 +32,7 @@ export default function BigHeadline({ headline }) {
                                     <p className='font-bold text-5xl lg:text-7xl mb-6'>{news.title}</p>
                                     <p className='hidden lg:block'>{news.subtitle}</p>
                                 </div>
-                                <img src={isValidUrl(news.media.url)} className='absolute h-full w-96 object-cover top-0 right-0' />
+                                <img src={isValidUrl(news.media.url)} className='absolute h-full w-full lg:w-96 object-cover top-0 right-0' />
                             </Link>
                         </SwiperSlide>
                     )

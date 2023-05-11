@@ -1,13 +1,12 @@
 import { Link } from "@inertiajs/react"
 
 export const NewsItem = ({ news }) => {
-    console.log('newsitem', news)
     const isValidUrl = (url) => {
         try {
             new URL(url);
             return url;
         } catch (e) {
-            return window.location.origin + '/uploads/' + url;
+            return '/storage/' + url;
         }
     }
     // const imageUrl = (news.media) ? news.media.url : `https://picsum.photos/400/500?random=${news.id}`;

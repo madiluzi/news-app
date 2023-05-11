@@ -21,7 +21,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = new NewsCollection(News::with('category', 'tag')->latest()->paginate(10));
+        $news = new NewsCollection(News::with('category', 'tag', 'author')->latest()->paginate(10));
         return Inertia::render('Admin/News/Index', [
             'news' => $news,
         ]);
@@ -51,6 +51,7 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        // dd($request->file('media')->getClientOriginalName());
         $request->validate([
             'title' => 'required',
             'subtitle' => 'required',
@@ -60,12 +61,18 @@ class NewsController extends Controller
             'tag' => 'required',
         ]);
 
-        $fileName = time().'.'.$request->media->extension();
-        $request->media->move(public_path('uploads'), $fileName);
+        // $fileNameWithExt = $request->file('media')->getClientOriginalName();
+        // $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+        $fileExt = $request->file('media')->getClientOriginalName();
+        // $fileNameSave = $fileName . '_' . time() . '.' . $fileExt;
+        $fileNameSave = time() . '.' . $fileExt;
+        $path = $request->file('media')->storeAs('media', $fileNameSave, 'public');
+        // dd($fileName);
+        // $request->media->move(public_path('uploads'), $fileName);
 
         $media = new Media;
         $media->caption = $request->title;
-        $media->url = $fileName;
+        $media->url = $path;
         $media->save();
 
         $news = new News;
@@ -75,7 +82,7 @@ class NewsController extends Controller
         $news->media_id = $media::latest()->first()->id;
         $news->category_id = $request->category;
         $news->tag_id = $request->tag;
-        $news->author = auth()->user()->name;
+        $news->author_id = auth()->user()->id;
         $news->save();
 
         return redirect()->route('news.index');
@@ -104,8 +111,10 @@ class NewsController extends Controller
     {
         $categories = new CategoryCollection(Category::all());
         $tags = new CategoryCollection(Tag::all());
+        // $media = Media::find($news->media_id);
         return Inertia::render('Admin/News/Edit', [
             'news' => $news,
+            'media' => $news->media,
             'categories' => $categories,
             'tags' => $tags,
         ]);
