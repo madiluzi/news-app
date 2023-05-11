@@ -16,7 +16,7 @@ class MediaController extends Controller
      */
     public function index()
     {
-        $medias = new NewsCollection(Media::latest()->paginate(32));
+        $medias = new NewsCollection(Media::latest()->paginate(24));
         return Inertia::render('Admin/Media/Index', [
             'medias' => $medias,
         ]);
