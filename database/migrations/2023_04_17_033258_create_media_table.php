@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('caption');
             $table->string('url');
+            $table->foreignId('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->timestamps();
         });
     }

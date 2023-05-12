@@ -21,7 +21,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = new NewsCollection(News::with('category', 'tag', 'author')->latest()->paginate(10));
+        $news = new NewsCollection(News::with('category', 'tag', 'author', 'status')->latest()->paginate(10));
         return Inertia::render('Admin/News/Index', [
             'news' => $news,
         ]);

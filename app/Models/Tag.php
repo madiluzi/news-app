@@ -15,4 +15,8 @@ class Tag extends Model
     public function news() {
         return $this->hasMany(News::class);
     }
+
+    public function status() {
+        return $this->belongsTo(Status::class);
+    }
 }

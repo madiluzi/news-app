@@ -18,6 +18,7 @@ class TagFactory extends Factory
     {
         return [
             "title" => fake()->realText(rand(15, 20)),
+            "status_id" => fake()->numberBetween(1, 3),
         ];
     }
 }

@@ -1,3 +1,4 @@
+import Badge from '@/Components/Badge';
 import { Pagination } from '@/Components/Pagination';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
@@ -33,6 +34,9 @@ export default function Index(props) {
                                     <th scope="col" className="px-6 py-3">
                                         Title
                                     </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Status
+                                    </th>
                                     <th scope="col" className="px-6 py-3"></th>
                                 </tr>
                             </thead>
@@ -42,6 +46,7 @@ export default function Index(props) {
                                         <tr key={key} className="bg-white border-b">
                                             <td className="px-6 py-4">{key + 1}</td>
                                             <td className="px-6 py-4">{item.title}</td>
+                                            <td className="px-6 py-4"><Badge status={item.status}/></td>
                                             <td className="px-6 py-4">
                                                 <div className='h-full flex gap-4 items-center justify-end'>
                                                     <Link href={route(`tag.edit`, item.id)}

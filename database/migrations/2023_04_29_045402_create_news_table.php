@@ -30,6 +30,9 @@ return new class extends Migration
             // $table->integer('author_id')->unsigned();
             $table->foreignId('author_id')->references('id')->on('users')->onDelete('cascade');
             // $table->foreignId('author_id')->constrained('users');
+            // $table->integer('status_id')->unsigned();
+            $table->foreignId('status_id')->references('id')->on('statuses')->onDelete('cascade');
+            // $table->foreignId('status_id')->constrained('statuses');
             $table->timestamps();
         });
     }
