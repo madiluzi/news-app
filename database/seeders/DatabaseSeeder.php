@@ -14,15 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            StatusSeeder::class,
-            CategorySeeder::class,
-            TagSeeder::class,
-            MediaSeeder::class,
-            NewsSeeder::class,
-            // UserSeeder::class,
-        ]);
-
         \App\Models\User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@admin.com',
@@ -31,6 +22,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\User::factory(10)->create();
+
+        $this->call([
+            StatusSeeder::class,
+            CategorySeeder::class,
+            TagSeeder::class,
+            MediaSeeder::class,
+            NewsSeeder::class,
+            // UserSeeder::class,
+        ]);
 
         // for ($i=0; $i < 10; $i++) {
         //     \App\Models\Media::insert([
