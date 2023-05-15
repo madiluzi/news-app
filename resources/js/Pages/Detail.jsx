@@ -27,10 +27,12 @@ export default function Detail(props) {
                     </div>
                     <div className='flex gap-2 lg:gap-0'>
                         <div className='w-6/12 lg:w-3/12 flex mb-6'>
-                            <img src='https://picsum.photos/1000/500?random=1' alt={props.news.author.name} className='w-12 h-12 mr-3 rounded-full object-cover' />
+                            <Link href={route('author', props.news.author_id)}>
+                                <img src='https://picsum.photos/1000/500?random=1' alt={props.news.author.name} className='w-12 h-12 mr-3 rounded-full object-cover' />
+                            </Link>
                             <div>
                                 <p className='font-bold'>Author</p>
-                                <Link href={route('category', props.news.category_id)}>{props.news.author.name}</Link>
+                                <Link href={route('author', props.news.author_id)}>{props.news.author.name}</Link>
                             </div>
                         </div>
                         <div className='w-6/12 lg:w-3/12 mb-6'>
