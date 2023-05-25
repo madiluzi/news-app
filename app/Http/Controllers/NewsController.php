@@ -50,7 +50,7 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         // dd($request->file('media')->getClientOriginalName());
         $request->validate([
             'title' => 'required',
@@ -73,6 +73,7 @@ class NewsController extends Controller
         $media = new Media;
         $media->caption = $request->title;
         $media->url = $path;
+        $media->status_id = 1;
         $media->save();
 
         $news = new News;
@@ -83,6 +84,7 @@ class NewsController extends Controller
         $news->category_id = $request->category;
         $news->tag_id = $request->tag;
         $news->author_id = auth()->user()->id;
+        $news->status_id = 1;
         $news->save();
 
         return redirect()->route('news.index');
