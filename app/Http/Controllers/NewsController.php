@@ -117,6 +117,7 @@ class NewsController extends Controller
         return Inertia::render('Admin/News/Edit', [
             'news' => $news,
             'media' => $news->media,
+            'category' => $news->category,
             'categories' => $categories,
             'tags' => $tags,
         ]);

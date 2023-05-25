@@ -69,10 +69,17 @@ export default function Index(props) {
                                                 {/* <td className="px-6 py-4">
                                                     <img src={window.location.origin + '/uploads/' + item.image} className='h-20 w-full object-cover' />
                                                 </td> */}
-                                                <td className="px-6 py-4">{item.category.title}</td>
+                                                <td className="px-6 py-4">
+                                                    {
+                                                        item.category.map((category, index, row) =>
+                                                            <span>{index + 1 === row.length ? category.title : category.title + ', '}</span>
+                                                        )
+                                                    }
+                                                </td>
+                                                {/* <td className="px-6 py-4">{item.category.title}</td> */}
                                                 <td className="px-6 py-4">{item.tag.title}</td>
                                                 <td className="px-6 py-4">{item.author.name}</td>
-                                                <td className="px-6 py-4"><Badge status={item.status}/></td>
+                                                <td className="px-6 py-4"><Badge status={item.status} /></td>
                                                 <td className="px-6 py-4">
                                                     <div className='h-full flex gap-4 items-center'>
                                                         <Link href={route(`news.edit`, item.id)}

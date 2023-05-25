@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('subtitle');
             $table->text('content');
             // $table->integer('category_id')->unsigned();
-            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
+            // $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             // $table->foreignId('category_id')->constrained('categories');
             // $table->integer('tag_id')->unsigned();
             $table->foreignId('tag_id')->references('id')->on('tags')->onDelete('cascade');

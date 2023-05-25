@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use App\Http\Resources\NewsCollection;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -11,10 +12,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // $news = News::all();
-        $headline = new NewsCollection(News::with('category', 'media')->inRandomOrder()->limit(5)->get());
-        $popular = new NewsCollection(News::inRandomOrder()->limit(4)->get());
-        $news = new NewsCollection(News::with('category', 'media', 'author')->paginate(6));
+        $headline = new NewsCollection(News::with('category', 'media')->where('status_id', 1)->inRandomOrder()->limit(5)->get());
+        $popular = new NewsCollection(News::where('status_id', 1)->inRandomOrder()->limit(4)->get());
+        $news = new NewsCollection(News::with('category', 'media', 'author')->where('status_id', 1)->paginate(6));
         return Inertia::render('Home', [
             'headline' => $headline,
             'popular' => $popular,
@@ -32,8 +32,12 @@ class HomeController extends Controller
 
     public function category($id)
     {
-        $news = new NewsCollection(News::with('category', 'media', 'author')->where('category_id', $id)->paginate(6));
+        $category = Category::find($id);
+        $news = new NewsCollection(News::with('category', 'media', 'author')->whereHas('category', function($q) use($id) {
+            $q->where('category_id', $id);
+        })->paginate(6));
         return Inertia::render('Category', [
+            'category' => $category,
             'news' => $news
         ]);
     }
