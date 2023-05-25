@@ -3,6 +3,7 @@ import { NewsList } from '@/Components/NewsList';
 import { Pagination } from '@/Components/Pagination';
 import Unauthenticated from '@/Layouts/UnauthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
+import CategoryList from './../Components/CategoryList';
 export default function Detail(props) {
     const isValidUrl = (url) => {
         try {
@@ -37,7 +38,8 @@ export default function Detail(props) {
                         </div>
                         <div className='w-6/12 lg:w-3/12 mb-6'>
                             <p className='font-bold'>Category</p>
-                            <Link href={route('category', props.news.category_id)}>{props.news.category.title}</Link>
+                            <CategoryList category={props.news.category} />
+                            {/* <Link href={route('category', props.news.category_id)}>{props.news.category.title}</Link> */}
                         </div>
                         <div className='hidden lg:w-3/12 lg:flex'></div>
                         <div className='hidden lg:w-3/12 lg:flex'>

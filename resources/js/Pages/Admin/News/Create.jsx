@@ -27,10 +27,10 @@ export default function Create(props) {
         })
 
     const tagOptions =
-        props.tags.data.map(category => {
-            category.value = category.id
-            category.label = category.title
-            return category;
+        props.tags.data.map(tag => {
+            tag.value = tag.id
+            tag.label = tag.title
+            return tag;
         })
 
     // create a preview as a side effect, whenever selected file is changed
@@ -192,7 +192,7 @@ export default function Create(props) {
                                 <Select id="category"
                                     className="basic-multi-select"
                                     classNamePrefix="select"
-                                    // isMulti
+                                    isMulti
                                     options={categoryOptions}
                                     onChange={(e) => setData("category", e.value)} />
                                 {/* <select id="category" name="category"

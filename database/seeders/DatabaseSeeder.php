@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             TagSeeder::class,
             MediaSeeder::class,
             NewsSeeder::class,
+            NewsCategorySeeder::class,
             // UserSeeder::class,
         ]);
 
