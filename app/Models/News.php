@@ -13,8 +13,12 @@ class News extends Model
         'title', 'content', 'author'
     ];
 
+    // public function category() {
+    //     return $this->belongsTo(Category::class);
+    // }
+
     public function category() {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class, 'news_categories');
     }
 
     public function tag() {
@@ -27,5 +31,9 @@ class News extends Model
 
     public function author() {
         return $this->belongsTo(User::class);
+    }
+
+    public function status() {
+        return $this->belongsTo(Status::class);
     }
 }

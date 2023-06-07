@@ -13,7 +13,15 @@ class Category extends Model
         'title'
     ];
 
+    // public function news() {
+    //     return $this->hasMany(News::class);
+    // }
+
     public function news() {
-        return $this->hasMany(News::class);
+        return $this->belongsToMany(News::class, 'news_categories');
+    }
+
+    public function status() {
+        return $this->belongsTo(Status::class);
     }
 }

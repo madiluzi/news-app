@@ -26,9 +26,10 @@ class NewsFactory extends Factory
             "subtitle" => fake()->realText(200),
             "content" => $content,
             "media_id" => fake()->numberBetween(1, 50),
-            "category_id" => fake()->randomDigitNotNull(),
+            // "category_id" => fake()->randomDigitNotNull(),
             "tag_id" => fake()->randomDigitNotNull(),
-            "author_id" => fake()->randomDigitNotNull()
+            "author_id" => fake()->randomDigitNotNull(),
+            "status_id" => fake()->numberBetween(1, 3),
         ];
     }
 }

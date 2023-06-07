@@ -19,6 +19,7 @@ class CategoryFactory extends Factory
         return [
             // "code" => fake()->bothify('???#####'),
             "title" => fake()->word(),
+            "status_id" => fake()->numberBetween(1, 3),
         ];
     }
 }

@@ -6,6 +6,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { useState, useEffect, useRef } from 'react';
 
 export default function Edit(props) {
+    console.log('props', props.news)
     // const [selectedFile, setSelectedFile] = useState()
     // const [preview, setPreview] = useState()
     const [selectedImage, setSelectedImage] = useState()
@@ -16,7 +17,7 @@ export default function Edit(props) {
         subtitle: props.news.subtitle || "",
         content: props.news.content || "",
         media: props.news.media_id || "",
-        category: props.news.category_id || "",
+        category: props.news.category || "",
         tag: props.news.tag_id || "",
     });
 
@@ -28,10 +29,10 @@ export default function Edit(props) {
         })
 
     const tagOptions =
-        props.tags.data.map(category => {
-            category.value = category.id
-            category.label = category.title
-            return category;
+        props.tags.data.map(tag => {
+            tag.value = tag.id
+            tag.label = tag.title
+            return tag;
         })
 
     // create a preview as a side effect, whenever selected file is changed
@@ -194,13 +195,14 @@ export default function Edit(props) {
                                 // onChange={onSelectFile}
                                 onChange={handleImageChange}
                                 ref={inputRef}
-                                 />
+                            />
                         </div>
                         <div className="flex gap-4">
                             <div className="mb-6 w-6/12">
                                 <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900">Category</label>
                                 <Select id="category" className='text-sm rounded-lg'
                                     options={categoryOptions}
+                                    isMulti
                                     defaultValue={categoryOptions.find(category => category.value === data.category)}
                                     onChange={(e) => setData("category", e.value)} />
                                 {/* <select id="category" name="category"

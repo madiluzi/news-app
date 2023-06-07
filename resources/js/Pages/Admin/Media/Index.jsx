@@ -3,6 +3,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import { Pagination } from '@/Components/Pagination';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Dropdown from '@/Components/Dropdown';
+import MediaItem from '@/Components/Media/MediaItem';
 
 export default function Index(props) {
     const { delete: destroy } = useForm()
@@ -11,6 +12,7 @@ export default function Index(props) {
 
     const handleClick = (id) => {
         setIsSelected(id)
+        console.log(isSelected)
     }
 
     const isValidUrl = (url) => {
@@ -21,6 +23,10 @@ export default function Index(props) {
             return '/storage/' + url;
         }
     }
+
+    const onLoad = () => {
+        console.log("loaded");
+    };
 
     function handleDelete(e) {
         e.preventDefault()
@@ -46,6 +52,11 @@ export default function Index(props) {
                             {
                                 props.medias.data.map((item, index) => {
                                     return (
+                                        // <MediaItem key={index}
+                                        //     media={item}
+                                        //     handleClick={handleClick}
+                                        //     isSelected={isSelected}
+                                        //     handleDelete={handleDelete} />
                                         <div key={index} className={isSelected === item.id ? 'relative rounded-lg border-4 border-indigo-700' : 'relative rounded-lg border-4 border-transparent'}
                                             onClick={() => handleClick(item.id)}>
                                             {isSelected === item.id &&
@@ -77,7 +88,7 @@ export default function Index(props) {
                                                     <div className="rounded-lg w-full bg-slate-300"></div>
                                                 </div>
                                             }
-                                            <img src={isValidUrl(item.url)} className='h-32 w-full rounded object-cover'
+                                            <img src={isValidUrl(item.url)} className={isLoaded ? 'h-32 w-full rounded object-cover' : 'hidden'}
                                                 onLoad={() => setIsLoaded(true)}
                                             />
                                         </div>

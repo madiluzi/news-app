@@ -20,6 +20,7 @@ class MediaFactory extends Factory
         return [
             "caption" => fake()->sentence(2),
             "url" => $url,
+            "status_id" => fake()->numberBetween(1, 3),
         ];
     }
 }

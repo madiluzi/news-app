@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = new CategoryCollection(Category::latest()->paginate(10));
+        $categories = new CategoryCollection(Category::with('status')->latest()->paginate(10));
         return Inertia::render('Admin/Category/Index', [
             'categories' => $categories,
         ]);

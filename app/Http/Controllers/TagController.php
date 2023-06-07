@@ -16,7 +16,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = new CategoryCollection(Tag::latest()->paginate(10));
+        $tags = new CategoryCollection(Tag::with('status')->latest()->paginate(10));
         return Inertia::render('Admin/Tag/Index', [
             'tags' => $tags,
         ]);
