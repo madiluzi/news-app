@@ -45,12 +45,17 @@ class MediaController extends Controller
             'image' => 'required',
         ]);
 
-        $fileName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('uploads'), $fileName);
+        // $fileNameWithExt = $request->file('media')->getClientOriginalName();
+        // $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+        $fileExt = $request->file('image')->getClientOriginalExtension();
+        // $fileNameSave = $fileName . '_' . time() . '.' . $fileExt;
+        $fileNameSave = time() . '.' . $fileExt;
+        $path = $request->file('image')->storeAs('media', $fileNameSave, 'public');
+        // $request->image->move(public_path('uploads'), $fileName);
 
         $media = new Media;
         $media->caption = $request->caption;
-        $media->url = $fileName;
+        $media->url = $path;
         $media->save();
 
         return redirect()->route('media.index');

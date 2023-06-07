@@ -50,8 +50,6 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // dd($request->file('media')->getClientOriginalName());
         $request->validate([
             'title' => 'required',
             'subtitle' => 'required',
@@ -63,7 +61,7 @@ class NewsController extends Controller
 
         // $fileNameWithExt = $request->file('media')->getClientOriginalName();
         // $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-        $fileExt = $request->file('media')->getClientOriginalName();
+        $fileExt = $request->file('media')->getClientOriginalExtension();
         // $fileNameSave = $fileName . '_' . time() . '.' . $fileExt;
         $fileNameSave = time() . '.' . $fileExt;
         $path = $request->file('media')->storeAs('media', $fileNameSave, 'public');

@@ -68,7 +68,7 @@ export default function Edit(props) {
 
     function handleRemoveSelectedImage() {
         setSelectedImage();
-        setData("image", null)
+        setData("image", props.news.media.url)
         inputRef.current.value = null;
     };
 

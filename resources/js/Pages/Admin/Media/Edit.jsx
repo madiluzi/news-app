@@ -20,7 +20,7 @@ export default function Create(props) {
 
     function handleRemoveSelectedImage() {
         setSelectedImage();
-        setData("image", null)
+        setData("image", props.media.url)
         inputRef.current.value = null;
     };
 
@@ -75,6 +75,7 @@ export default function Create(props) {
                             <input type="text" id="caption" name="caption"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 onChange={(e) => setData("caption", e.target.value)}
+                                value={data.caption}
                                 required />
                         </div>
                         <button type="submit"
