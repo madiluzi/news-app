@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useForm } from '@inertiajs/react';
 import Dropdown from '@/Components/Dropdown';
+import { IconDotsVertical } from '@tabler/icons-react';
+import { IconDotsDiagonal } from '@tabler/icons-react';
 
 export default function MediaItem(props) {
     const { delete: destroy } = useForm()
@@ -30,7 +32,7 @@ export default function MediaItem(props) {
 
     return (
         <div
-            className={props.isSelected === props.media.id ? 'relative rounded-lg border-4 border-indigo-700' : 'relative rounded-lg border-4 border-transparent'}
+            className={props.isSelected === props.media.id ? 'relative rounded-lg border-4 border-gray-700' : 'relative rounded-lg border-4 border-transparent'}
             onClick={() => props.handleClick(props.media.id)}>
             {props.isSelected === props.media.id &&
                 <>
@@ -38,9 +40,13 @@ export default function MediaItem(props) {
                         <Dropdown.Trigger>
                             {/* <span className="inline-flex rounded-md"> */}
                             <button className='absolute top-1 right-1 p-1 rounded-full bg-black/40 text-white'>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                                </svg>
+                                <IconDotsDiagonal className='w-4 h-4' />
+                                {/* <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots-vertical" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                    <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                    <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+                                </svg> */}
                             </button>
                         </Dropdown.Trigger>
 

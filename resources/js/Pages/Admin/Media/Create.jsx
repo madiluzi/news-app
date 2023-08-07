@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
+import { IconCloudUpload } from '@tabler/icons-react';
 import { useState, useRef } from 'react';
 
 export default function Create(props) {
@@ -72,7 +73,7 @@ export default function Create(props) {
                                                 </div>
                                                 :
                                                 <>
-                                                    <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                                    <IconCloudUpload className='w-10 h-10 mb-3 text-gray-400' />
                                                     <p class="mb-2 text-sm font-semibold text-gray-500 dark:text-gray-400">Click to upload image</p>
                                                     {/* <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
                                                 </>
@@ -84,6 +85,7 @@ export default function Create(props) {
                                         required />
                                 </label>
                             </div>
+                            {props.errors.image && <span className='text-sm text-red-700'>{props.errors.image}</span>}
                             {/* <label htmlFor="media" className="block mb-2 text-sm font-medium text-gray-900">Image</label>
                             <input type="file" id="media" name="media" accept='image/*'
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -97,6 +99,7 @@ export default function Create(props) {
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 onChange={(e) => setData("caption", e.target.value)}
                                 required />
+                            {props.errors.caption && <span className='text-sm text-red-700'>{props.errors.caption}</span>}
                         </div>
                         <button type="submit"
                             className='inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'>

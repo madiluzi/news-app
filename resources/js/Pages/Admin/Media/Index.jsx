@@ -4,6 +4,7 @@ import { Pagination } from '@/Components/Pagination';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Dropdown from '@/Components/Dropdown';
 import MediaItem from '@/Components/Media/MediaItem';
+import { IconDotsVertical } from '@tabler/icons-react';
 
 export default function Index(props) {
     const { delete: destroy } = useForm()
@@ -52,46 +53,44 @@ export default function Index(props) {
                             {
                                 props.medias.data.map((item, index) => {
                                     return (
-                                        // <MediaItem key={index}
-                                        //     media={item}
-                                        //     handleClick={handleClick}
-                                        //     isSelected={isSelected}
-                                        //     handleDelete={handleDelete} />
-                                        <div key={index} className={isSelected === item.id ? 'relative rounded-lg border-4 border-indigo-700' : 'relative rounded-lg border-4 border-transparent'}
-                                            onClick={() => handleClick(item.id)}>
-                                            {isSelected === item.id &&
-                                                <>
-                                                    <Dropdown>
-                                                        <Dropdown.Trigger>
-                                                            {/* <span className="inline-flex rounded-md"> */}
-                                                            <button className='absolute top-1 right-1 p-1 rounded-full bg-black/40 text-white'>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                                                                </svg>
-                                                            </button>
-                                                        </Dropdown.Trigger>
+                                        <MediaItem key={index}
+                                            media={item}
+                                            handleClick={handleClick}
+                                            isSelected={isSelected}
+                                            handleDelete={handleDelete} />
+                                        // <div key={index} className={isSelected === item.id ? 'relative rounded-lg border-4 border-indigo-700' : 'relative rounded-lg border-4 border-transparent'}
+                                        //     onClick={() => handleClick(item.id)}>
+                                        //     {isSelected === item.id &&
+                                        //         <>
+                                        //             <Dropdown>
+                                        //                 <Dropdown.Trigger>
+                                        //                     {/* <span className="inline-flex rounded-md"> */}
+                                        //                     <button className='absolute top-1 right-1 p-1 rounded-full bg-black/40 text-white'>
+                                        //                         <IconDotsVertical className='w-4 h-4' />
+                                        //                     </button>
+                                        //                 </Dropdown.Trigger>
 
-                                                        <Dropdown.Content width='20' contentClasses='py-1 bg-white mt-6'>
-                                                            <Dropdown.Link href={route(`media.edit`, item.id)}>
-                                                                Edit
-                                                            </Dropdown.Link>
-                                                            <Dropdown.Link className='bg-red-600 text-white hover:bg-red-500 focus:bg-red-500 active:bg-red-900' onClick={handleDelete} id={item.id}>
-                                                                Delete
-                                                            </Dropdown.Link>
-                                                        </Dropdown.Content>
-                                                    </Dropdown>
-                                                </>
-                                            }
-                                            {
-                                                !isLoaded &&
-                                                <div className="animate-pulse flex space-x-4 h-32 rounded w-full">
-                                                    <div className="rounded-lg w-full bg-slate-300"></div>
-                                                </div>
-                                            }
-                                            <img src={isValidUrl(item.url)} className={isLoaded ? 'h-32 w-full rounded object-cover' : 'hidden'}
-                                                onLoad={() => setIsLoaded(true)}
-                                            />
-                                        </div>
+                                        //                 <Dropdown.Content width='20' contentClasses='py-1 bg-white mt-6'>
+                                        //                     <Dropdown.Link href={route(`media.edit`, item.id)}>
+                                        //                         Edit
+                                        //                     </Dropdown.Link>
+                                        //                     <Dropdown.Link className='bg-red-600 text-white hover:bg-red-500 focus:bg-red-500 active:bg-red-900' onClick={handleDelete} id={item.id}>
+                                        //                         Delete
+                                        //                     </Dropdown.Link>
+                                        //                 </Dropdown.Content>
+                                        //             </Dropdown>
+                                        //         </>
+                                        //     }
+                                        //     {
+                                        //         !isLoaded &&
+                                        //         <div className="animate-pulse flex space-x-4 h-32 rounded w-full">
+                                        //             <div className="rounded-lg w-full bg-slate-300"></div>
+                                        //         </div>
+                                        //     }
+                                        //     <img src={isValidUrl(item.url)} className={isLoaded ? 'h-32 w-full rounded object-cover' : 'hidden'}
+                                        //         onLoad={() => setIsLoaded(true)}
+                                        //     />
+                                        // </div>
                                     )
                                 })
                             }

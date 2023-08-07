@@ -4,6 +4,7 @@ import Select from 'react-select';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { useState, useEffect, useRef } from 'react';
+import { IconCloudUpload, IconTrash } from '@tabler/icons-react';
 
 export default function Create(props) {
     // const [selectedFile, setSelectedFile] = useState()
@@ -102,6 +103,7 @@ export default function Create(props) {
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 onChange={(e) => setData("title", e.target.value)}
                                 required />
+                            {props.errors.title && <span className='text-sm text-red-700'>{props.errors.title}</span>}
                         </div>
                         <div className="mb-6">
                             <label htmlFor="subtitle" className="block mb-2 text-sm font-medium text-gray-900">Subtitle</label>
@@ -134,6 +136,7 @@ export default function Create(props) {
                             //     console.log('Focus.', editor);
                             // }}
                             />
+                            {props.errors.subtitle && <span className='text-sm text-red-700'>{props.errors.subtitle}</span>}
                         </div>
                         <div className="mb-6">
                             <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-900">Content</label>
@@ -166,6 +169,7 @@ export default function Create(props) {
                             //     console.log('Focus.', editor);
                             // }}
                             />
+                            {props.errors.content && <span className='text-sm text-red-700'>{props.errors.content}</span>}
                         </div>
                         <div className="mb-6">
                             {/* {
@@ -192,12 +196,13 @@ export default function Create(props) {
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                                                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                         </svg>
+                                                        <IconTrash className='w-4 h-4' />
                                                     </button>
                                                     <img src={URL.createObjectURL(selectedImage)} className='object-cover w-auto h-56 mx-auto mb-2' />
                                                 </div>
                                                 :
                                                 <>
-                                                    <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                                    <IconCloudUpload className='w-10 h-10 mb-3 text-gray-400' />
                                                     <p class="mb-2 text-sm font-semibold text-gray-500 dark:text-gray-400">Click to upload image</p>
                                                     {/* <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
                                                 </>
@@ -209,6 +214,7 @@ export default function Create(props) {
                                         required />
                                 </label>
                             </div>
+                            {props.errors.media && <span className='text-sm text-red-700'>{props.errors.media}</span>}
                             {/* <label htmlFor="media" className="block mb-2 text-sm font-medium text-gray-900">Image</label>
                             <input type="file" id="media" name="media" accept='image/*'
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -233,6 +239,7 @@ export default function Create(props) {
                                         props.categories.data.map(category => <option key={category.id} value={category.id}>{category.title}</option>)
                                     }
                                 </select> */}
+                                {props.errors.categories && <span className='text-sm text-red-700'>{props.errors.categories}</span>}
                             </div>
                             <div className="w-6/12 mb-6">
                                 <label htmlFor="tag" className="block mb-2 text-sm font-medium text-gray-900">Tag</label>
@@ -250,6 +257,7 @@ export default function Create(props) {
                                         props.tags.data.map(tag => <option key={tag.id} value={tag.id}>{tag.title}</option>)
                                     }
                                 </select> */}
+                                {props.errors.tag && <span className='text-sm text-red-700'>{props.errors.tag}</span>}
                             </div>
                         </div>
                         <button type="submit"

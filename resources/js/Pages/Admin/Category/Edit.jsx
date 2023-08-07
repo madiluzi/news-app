@@ -31,6 +31,7 @@ export default function Edit(props) {
                                 onChange={(e) => setData("title", e.target.value)}
                                 value={data.title}
                                 required />
+                            {props.errors.title && <span className='text-sm text-red-700'>{props.errors.title}</span>}
                         </div>
                         <input type='hidden' value={data.id} />
                         <button type="submit"
