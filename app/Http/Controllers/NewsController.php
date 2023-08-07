@@ -7,10 +7,12 @@ use Illuminate\Http\Response;
 use Inertia\Inertia;
 use App\Models\News;
 use App\Models\Category;
+use App\Models\NewsCategory;
 use App\Models\Tag;
 use App\Models\Media;
 use App\Http\Resources\NewsCollection;
 use App\Http\Resources\CategoryCollection;
+use Carbon\Carbon;
 
 class NewsController extends Controller
 {
@@ -57,7 +59,7 @@ class NewsController extends Controller
             'subtitle' => 'required',
             'content' => 'required',
             'media' => 'required',
-            'category' => 'required',
+            'categories' => 'required',
             'tag' => 'required',
         ]);
 
@@ -81,11 +83,22 @@ class NewsController extends Controller
         $news->subtitle = $request->subtitle;
         $news->content = $request->content;
         $news->media_id = $media::latest()->first()->id;
-        $news->category_id = $request->category;
+        // $news->category_id = $request->category;
         $news->tag_id = $request->tag;
         $news->author_id = auth()->user()->id;
         $news->status_id = 1;
+        $news->created_at = Carbon::now();
         $news->save();
+
+        // $newsCategory = new NewsCategory;
+        foreach ($request->categories as $key => $value) {
+            $items[] = [
+                "category_id" => $value, // change this
+                "news_id" => $news::latest()->first()->id,
+                'created_at' => Carbon::now(),
+            ];
+        }
+        NewsCategory::insert($items);
 
         return redirect()->route('news.index');
     }
@@ -136,7 +149,7 @@ class NewsController extends Controller
             'title' => 'required',
             'subtitle' => 'required',
             'content' => 'required',
-            'category' => 'required',
+            'categories' => 'required',
             'tag' => 'required',
         ]);
 
@@ -144,9 +157,19 @@ class NewsController extends Controller
         $news->title = $request->title;
         $news->subtitle = $request->subtitle;
         $news->content = $request->content;
-        $news->category_id = $request->category;
+        // $news->category_id = $request->category;
         $news->tag_id = $request->tag;
         $news->save();
+
+        // $newsCategory = new NewsCategory;
+        foreach ($request->categories as $key => $value) {
+            $items[] = [
+                "category_id" => $value, // change this
+                "news_id" => $news::latest()->first()->id,
+                'created_at' => Carbon::now(),
+            ];
+        }
+        NewsCategory::insert($items);
 
         return redirect()->route('news.index');
     }

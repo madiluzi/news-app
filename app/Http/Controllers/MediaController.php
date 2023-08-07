@@ -56,6 +56,7 @@ class MediaController extends Controller
         $media = new Media;
         $media->caption = $request->caption;
         $media->url = $path;
+        $media->status_id = 1;
         $media->save();
 
         return redirect()->route('media.index');
@@ -94,7 +95,17 @@ class MediaController extends Controller
      */
     public function update(Request $request, Media $medium)
     {
-        //
+        dd($request->all());
+        $request->validate([
+            'caption' => 'required',
+            'image' => 'required',
+        ]);
+
+        $media = Media::find($request->id);
+        $media->title = $request->title;
+        $media->save();
+
+        return redirect()->route('media.index');
     }
 
     /**

@@ -15,16 +15,16 @@ export default function Index(props) {
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">News</h2>}
+            header={<h2 className="text-xl font-semibold leading-tight text-gray-800">News</h2>}
         >
             <Head title="News" />
 
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <Link href={route("news.create")} type="button"
-                        className="inline-block items-center px-4 py-2 mb-6 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        className="items-center inline-block px-4 py-2 mb-6 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         Add Item</Link>
-                    <div className="relative overflow-x-auto mb-6">
+                    <div className="relative mb-6 overflow-x-auto">
                         <table className="w-full text-sm text-left text-gray-500">
                             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
@@ -59,15 +59,15 @@ export default function Index(props) {
                                 {
                                     props.news.data.map((item, key) => {
                                         return (
-                                            <tr key={key} className="bg-white border-b">
+                                            <tr key={item.id} className="bg-white border-b">
                                                 <td className="px-6 py-4">{key + 1}</td>
                                                 <td className="px-6 py-4">{item.title}</td>
                                                 {/* <td className="px-6 py-4">{item.content}</td> */}
                                                 <td className="px-6 py-4">
-                                                    <div className='prose prose-sm text-gray-500 line-clamp-5' dangerouslySetInnerHTML={{ __html: item.content }} />
+                                                    <div className='prose-sm prose text-gray-500 line-clamp-5' dangerouslySetInnerHTML={{ __html: item.content }} />
                                                 </td>
                                                 {/* <td className="px-6 py-4">
-                                                    <img src={window.location.origin + '/uploads/' + item.image} className='h-20 w-full object-cover' />
+                                                    <img src={window.location.origin + '/uploads/' + item.image} className='object-cover w-full h-20' />
                                                 </td> */}
                                                 <td className="px-6 py-4">
                                                     {
@@ -81,9 +81,9 @@ export default function Index(props) {
                                                 <td className="px-6 py-4">{item.author.name}</td>
                                                 <td className="px-6 py-4"><Badge status={item.status} /></td>
                                                 <td className="px-6 py-4">
-                                                    <div className='h-full flex gap-4 items-center'>
+                                                    <div className='flex items-center h-full gap-4'>
                                                         <Link href={route(`news.edit`, item.id)}
-                                                            className="px-2 py-2 inline-block bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                            className="inline-block px-2 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                                 strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                                                                 <path strokeLinecap="round" strokeLinejoin="round"
@@ -91,7 +91,7 @@ export default function Index(props) {
                                                             </svg>
                                                         </Link>
                                                         <Link href={route(`article`, item.id)}
-                                                            className="px-2 py-2 inline-block bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                            className="inline-block px-2 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                                 strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
@@ -99,7 +99,7 @@ export default function Index(props) {
                                                         </Link>
                                                         <button onClick={handleDelete}
                                                             id={item.id}
-                                                            className="px-2 py-2 inline-block bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:bg-red-500 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                                            className="inline-block px-2 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md hover:bg-red-500 focus:bg-red-500 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                             </svg>

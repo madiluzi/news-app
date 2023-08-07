@@ -17,7 +17,11 @@ export default function Edit(props) {
         subtitle: props.news.subtitle || "",
         content: props.news.content || "",
         media: props.news.media_id || "",
-        category: props.news.category || "",
+        categories: props.news.category.map(category => {
+            category.value = category.id
+            category.label = category.title
+            return category
+        }) || [],
         tag: props.news.tag_id || "",
     });
 
@@ -75,6 +79,8 @@ export default function Edit(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
+        console.log('data', data);
+        console.log('===================');
         put(route("news.update", props.news.id));
     }
 
@@ -95,12 +101,12 @@ export default function Edit(props) {
         <AuthenticatedLayout
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Edit News</h2>}
+            header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Edit News</h2>}
         >
             <Head title="Edit News" />
 
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                <div className="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
                     <form onSubmit={handleSubmit} encType="multipart/form-data">
                         <div className="mb-6">
                             <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900">Title</label>
@@ -176,18 +182,18 @@ export default function Edit(props) {
                             // }}
                             />
                         </div>
-                        <div className="mb-6">
+                        {/* <div className="mb-6">
                             <label htmlFor="media" className="block mb-2 text-sm font-medium text-gray-900">Image</label>
-                            <div className='my-4 w-6/12 h-auto mx-auto relative'>
+                            <div className='relative w-6/12 h-auto mx-auto my-4'>
                                 {selectedImage &&
                                     <button onClick={handleRemoveSelectedImage}
-                                        className="absolute top-3 right-3 px-2 py-2 inline-block bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:bg-red-500 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                        className="absolute inline-block px-2 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md top-3 right-3 hover:bg-red-500 focus:bg-red-500 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                         </svg>
                                     </button>
                                 }
-                                <img src={selectedImage ? URL.createObjectURL(selectedImage) : isValidUrl(props.news.media.url)} className='mb-2 h-56 w-auto object-cover mx-auto' />
+                                <img src={selectedImage ? URL.createObjectURL(selectedImage) : isValidUrl(props.news.media.url)} className='object-cover w-auto h-56 mx-auto mb-2' />
                             </div>
                             <input type="file" id="media" name="media" accept='image/*'
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -196,15 +202,73 @@ export default function Edit(props) {
                                 onChange={handleImageChange}
                                 ref={inputRef}
                             />
+                        </div> */}
+                        <div className="mb-6">
+                            {/* {
+                                selectedImage &&
+                                <div className='relative w-6/12 h-auto mx-auto my-4'>
+                                    <button onClick={handleRemoveSelectedImage}
+                                        className="absolute inline-block px-2 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md top-3 right-3 hover:bg-red-500 focus:bg-red-500 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                        </svg>
+                                    </button>
+                                    <img src={URL.createObjectURL(selectedImage)} className='w-auto h-56 mx-auto mb-2' />
+                                </div>
+                            } */}
+                            <label htmlFor="media" className="block mb-2 text-sm font-medium text-gray-900">Image</label>
+                            <div class="flex items-center justify-center w-full">
+                                <label htmlFor="media" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        {
+                                            selectedImage || data.media ?
+                                                <div className='relative w-full h-auto mx-auto my-4'>
+                                                    {
+                                                        selectedImage &&
+                                                        <button onClick={handleRemoveSelectedImage}
+                                                            className="absolute inline-block px-2 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md top-3 right-3 hover:bg-red-500 focus:bg-red-500 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                            </svg>
+                                                        </button>
+                                                    }
+
+                                                    <img src={selectedImage ? URL.createObjectURL(selectedImage) : isValidUrl(props.news.media.url)} className='object-cover w-auto h-56 mx-auto mb-2' />
+                                                </div>
+                                                :
+                                                <>
+                                                    <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                                    <p class="mb-2 text-sm font-semibold text-gray-500 dark:text-gray-400">Click to upload image</p>
+                                                    {/* <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
+                                                </>
+                                        }
+                                    </div>
+                                    <input id="media" type="file" class="hidden" name="media" accept='image/*'
+                                        onChange={handleImageChange}
+                                        ref={inputRef}
+                                        required />
+                                </label>
+                            </div>
+                            {/* <label htmlFor="media" className="block mb-2 text-sm font-medium text-gray-900">Image</label>
+                            <input type="file" id="media" name="media" accept='image/*'
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                onChange={handleImageChange}
+                                ref={inputRef}
+                                required /> */}
                         </div>
                         <div className="flex gap-4">
-                            <div className="mb-6 w-6/12">
+                            <div className="w-6/12 mb-6">
                                 <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900">Category</label>
                                 <Select id="category" className='text-sm rounded-lg'
                                     options={categoryOptions}
                                     isMulti
-                                    defaultValue={categoryOptions.find(category => category.value === data.category)}
-                                    onChange={(e) => setData("category", e.value)} />
+                                    defaultValue={data.categories}
+                                    // defaultValue={categoryOptions.find(category => {
+                                    //     console.log('category', category);
+                                    //     category.value === data.category
+                                    // })}
+                                    // defaultValue={categoryOptions.find(categories.map(category => category.value === data.category))}
+                                    onChange={(e) => setData("categories", Array.isArray(e) ? e.map(x => x.value) : [])} />
                                 {/* <select id="category" name="category"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     onChange={(e) => setData("category", e.target.value)}
@@ -215,7 +279,7 @@ export default function Edit(props) {
                                     }
                                 </select> */}
                             </div>
-                            <div className="mb-6 w-6/12">
+                            <div className="w-6/12 mb-6">
                                 <label htmlFor="tag" className="block mb-2 text-sm font-medium text-gray-900">Tag</label>
                                 <Select id="tag" className='text-sm rounded-lg'
                                     options={tagOptions}
@@ -234,7 +298,7 @@ export default function Edit(props) {
                         </div>
                         <input type='hidden' value={data.id} />
                         <button type="submit"
-                            className='inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'>
+                            className='inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'>
                             Submit</button>
                     </form>
                 </div>
