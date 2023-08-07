@@ -46,6 +46,7 @@ class CategoryController extends Controller
 
         $category = new Category;
         $category->title = $request->title;
+        $category->status_id = 1;
         $category->save();
 
         return redirect()->route('category.index');

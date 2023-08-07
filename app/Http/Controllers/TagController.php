@@ -46,6 +46,7 @@ class TagController extends Controller
 
         $tag = new Tag;
         $tag->title = $request->title;
+        $tag->status_id = 1;
         $tag->save();
 
         return redirect()->route('tag.index');
